@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include <map>
-#include <SDL2/SDL_ttf.h>
+#include <SDL_ttf.h>
 #include "maxRectsBinPack/MaxRectsBinPack.h"
 #include "Config.h"
 #include "GlyphInfo.h"

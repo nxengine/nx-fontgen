@@ -1,6 +1,6 @@
 #include "App.h"
 #include "ProgramOptions.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <string>
 #include <fstream>
 #include <array>

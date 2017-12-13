@@ -3,8 +3,8 @@
 #include <fstream>
 #include <stdexcept>
 #include <regex>
-#include <codecvt>
 #include "args.hpp"
+#include "utf8.h"
 #include "HelpException.h"
 
 Config helpers::parseCommandLine(int argc, const char* const argv[])
@@ -161,12 +161,15 @@ std::set<uint32_t> helpers::getCharsFromFile(const std::string& f)
     std::string str((std::istreambuf_iterator<char>(fs)),
                     std::istreambuf_iterator<char>());
 
-    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> cvt;
-    std::u32string utf32str = cvt.from_bytes(str);
-
     std::set<uint32_t> result;
-    for (auto c: utf32str)
-        result.insert(static_cast<uint32_t>(c));
+
+    std::string::iterator it = str.begin();
+
+    while(it != str.end())
+    {
+        char32_t ch = utf8::next(it, str.end());
+        result.insert(ch);
+    }
     return result;
 }
 

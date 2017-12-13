@@ -1,0 +1,27 @@
+language: cpp
+
+matrix:
+  include:
+    - os: linux
+      sudo: required
+      dist: trusty
+      compiler: gcc
+      env:
+         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+         - INSTALLGCC=1
+
+    - os: linux
+      compiler: clang
+      sudo: required
+      dist: trusty
+
+script:
+  - cmake .
+  - make
+
+before_install:
+  - eval "${MATRIX_EVAL}"
+
+install:
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then source ./travis/linux.install.sh; fi
+

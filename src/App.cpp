@@ -178,7 +178,8 @@ void App::execute(int argc, char* argv[])
         std::stringstream ss;
         ss << outputName << "_" << std::setfill ('0') << std::setw(pageNameDigits) << page << ".png";
         std::string pageName = ss.str();
-        pageNames.push_back(pageName);
+        std::string baseName = pageName.substr(pageName.rfind("/")+1);
+        pageNames.push_back(baseName);
 
         SDL_SavePNG(outputSurface, pageName.c_str());
     }

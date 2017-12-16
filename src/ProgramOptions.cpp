@@ -47,9 +47,9 @@ Config helpers::parseCommandLine(int argc, const char* const argv[])
         throw std::logic_error("aborted");
     }
 
-    if (!arg_chars && !arg_chars_file)
+    if (!arg_chars)
         chars = "32-127";
-    else if (arg_chars)
+    else (arg_chars)
         chars = args::get(arg_chars);
 
     config.chars = parseCharsString(chars);

@@ -31,3 +31,17 @@ install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ];   then source ./travis/osx.install.sh;   fi
 
 
+before_deploy:
+- if [ "$TRAVIS_OS_NAME" == "linux" ];   then source ./travis/linux.package.sh;   fi
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "lbKEbhW5/6by3rSPGoEL9R4tUYva3JVwbyd7+yAtWK1namdORjndbehmNMapwWEfXeZBHjd3Yuuz+FjwDNGFN7ufhIAipJP0Cn2p/I5miNShxq8mUBVjAHONvkOIuPMAcyCaVLdOuMkBDbcWWFEIqnq9nOINtz9inj1DQ7scMzG+3oiC+EyTFyvAq+aX8fZI4T27ynGZz8VofuR/kgKqkX7p+YYcJ3Gk8zZuG3KtscpITWWmLGzUMugpde/n8SgoAX6OIi0qyxOhml4M+4QkHAQycp/xbi757PVwdtFimIigJauc1/h5J8nhlii8M1fDQFWrtTV1iRHNblMXn5efP4LUlkOP65FKef1nNbKTjM+wsDtPFOlrdqM4r8PLxtwlsHNWBSsdrypqhAsKp1gOSqceWbT6r6MJNCqYedYFD5dUXebZRL56xlv4LHYy5FVa5MFGKDFomVsns0LcQuKsNSI0AGyXd+XOZ3OoeNX8R9Y13ywLrEC9aIKxzz1VbV30C5z6LgvaC3ltoLOJc7tGCsntInWxodDiSxeMzyuriJWJBxC372XkY0VBvqFq8RsLOjdkmdyu8I2dWNzsL1tODpWY510hQ2eDWAUiT5C3pPcqNtACpsJZmPe7EsHo9gFvdR9rIvZaCM/8fBGowACFnIREh3gpzcXof7O32NHUDzQ="
+  file: fontbm.tar.gz
+  skip_cleanup: true
+  overwrite: true
+  draft: true
+  on:
+    tags: true
+    condition: "$TRAVIS_OS_NAME = linux && $CC = gcc-6"

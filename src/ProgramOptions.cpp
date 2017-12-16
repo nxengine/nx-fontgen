@@ -49,7 +49,7 @@ Config helpers::parseCommandLine(int argc, const char* const argv[])
 
     if (!arg_chars)
         chars = "32-127";
-    else (arg_chars)
+    else
         chars = args::get(arg_chars);
 
     config.chars = parseCharsString(chars);

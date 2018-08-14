@@ -29,18 +29,18 @@ Config helpers::parseCommandLine(int argc, const char* const argv[])
     {
         parser.ParseCLI(argc, argv);
     }
-    catch (args::Help)
+    catch (args::Help&)
     {
         std::cout << "Usage:\n" << parser;
         throw std::logic_error("aborted");
     }
-    catch (args::ParseError e)
+    catch (args::ParseError& e)
     {
         std::cerr << e.what() << std::endl;
         std::cerr << "\n\nUsage:\n" << parser;
         throw std::logic_error("aborted");
     }
-    catch (args::ValidationError e)
+    catch (args::ValidationError& e)
     {
         std::cerr << e.what() << std::endl;
         std::cerr << "\n\nUsage:\n" << parser;

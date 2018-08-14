@@ -7,6 +7,7 @@
 #include <SDL.h>
 #include <png.h>
 #include <stdlib.h>
+#include <iostream>
 
 #define SUCCESS 0
 #define ERROR -1
@@ -112,6 +113,11 @@ int SDL_SavePNG_RW(SDL_Surface *surface, SDL_RWops *dst, int freedst)
 	{
 		colortype |= PNG_COLOR_MASK_PALETTE;
 		pal_ptr = (png_colorp)malloc(pal->ncolors * sizeof(png_color));
+        if (pal_ptr == nullptr)
+        {
+            std::cout << "Could not allocate memory for palette";
+            exit(EXIT_FAILURE);
+        }
 		for (i = 0; i < pal->ncolors; i++) {
 			pal_ptr[i].red   = pal->colors[i].r;
 			pal_ptr[i].green = pal->colors[i].g;
@@ -138,6 +144,11 @@ int SDL_SavePNG_RW(SDL_Surface *surface, SDL_RWops *dst, int freedst)
 	png_write_info(png_ptr, info_ptr);
 #ifdef USE_ROW_POINTERS
 	row_pointers = (png_bytep*) malloc(sizeof(png_bytep)*surface->h);
+    if (row_pointers == nullptr)
+    {
+        std::cout << "Could not allocate memory for rows";
+        exit(EXIT_FAILURE);
+    }
 	for (i = 0; i < surface->h; i++)
 		row_pointers[i] = (png_bytep)(Uint8*)surface->pixels + i * surface->pitch;
 	png_write_image(png_ptr, row_pointers);

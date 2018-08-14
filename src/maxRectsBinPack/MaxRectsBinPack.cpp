@@ -95,7 +95,8 @@ void MaxRectsBinPack::Insert(std::vector<RectSize> &rects, std::vector<Rect> &ds
 		{
 			int score1;
 			int score2;
-			Rect newNode = ScoreRect(rects[i].width, rects[i].height, method, score1, score2);
+
+            Rect newNode = ScoreRect(rects[i].width, rects[i].height, method, score1, score2);
 
 			if (score1 < bestScore1 || (score1 == bestScore1 && score2 < bestScore2))
 			{
@@ -167,7 +168,7 @@ float MaxRectsBinPack::Occupancy() const
 	for(size_t i = 0; i < usedRectangles.size(); ++i)
 		usedSurfaceArea += usedRectangles[i].width * usedRectangles[i].height;
 
-	return (float)usedSurfaceArea / (binWidth * binHeight);
+	return (float)usedSurfaceArea / ((double)binWidth * (double)binHeight);
 }
 
 Rect MaxRectsBinPack::FindPositionForNewNodeBottomLeft(int width, int height, int &bestY, int &bestX) const

@@ -1648,8 +1648,9 @@ namespace args
                     {
                         parserCoroutine(coro.Parser());
                     }
-                    catch (args::SubparserError)
+                    catch (args::SubparserError&)
                     {
+                        throw;  // Stub to avoid simply hiding the presence of the exception
                     }
 #else
                     parserCoroutine(coro.Parser());

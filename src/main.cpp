@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
         std::unique_ptr<App> app(new App);
         app->execute(argc, argv);
     }
-    catch (HelpException)
+    catch (HelpException&)
     {
         return EXIT_SUCCESS;
     }

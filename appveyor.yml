@@ -12,3 +12,19 @@ build:
   project: win32/fontbm/fontbm.sln
   verbosity: minimal
 
+before_deploy:
+ - ps: .\win32\win.package.ps1
+
+deploy:
+  - provider: GitHub
+    release: $(APPVEYOR_REPO_TAG_NAME)
+    tag: $(APPVEYOR_REPO_TAG_NAME)
+    description: ''
+    auth_token:
+      secure: UNAaCG+KMRMqZqVEHpSgXTXZOJlqEQ/7nySQ6U/LutHjXnuqVNpYDxoqIW1hufI+
+    artifact: /fontbm-.*\.zip/
+    draft: true
+    force_update: true
+    prerelease: false
+    on:
+      appveyor_repo_tag: true

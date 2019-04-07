@@ -13,6 +13,7 @@ if ($env:PLATFORM -eq "x86") {
 if ($env:PLATFORM -eq "x86") {
   #bundle libs
   cp ..\win32\ext\runtime\x86\* .\
+  cp -r ..\assets .\assets
 
   #create zip
   $name = "fontbm-$env:APPVEYOR_REPO_TAG_NAME-Win32.zip"
@@ -22,6 +23,7 @@ if ($env:PLATFORM -eq "x86") {
 } else {
   #bundle libs
   cp ..\win32\ext\runtime\x64\* .\
+  cp -r ..\assets .\assets
 
   #create zip
   $name = "fontbm-$env:APPVEYOR_REPO_TAG_NAME-Win64.zip"
